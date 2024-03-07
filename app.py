@@ -14,4 +14,8 @@ if __name__ == '__main__':
     # Blueprints
     app.register_blueprint(Aviones.main, url_prefix='/api/aviones')
     app.register_error_handler(404, page_not_found)
-    app.run(port=5005)
+    app.run(debug=True, use_reloader=False)
+
+
+
+
