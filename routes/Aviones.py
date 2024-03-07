@@ -21,6 +21,8 @@ def get_avion(matricula):
         return avion
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+
 @main.route('/add', methods=['POST'])
 def add_avion():
     try:
@@ -28,7 +30,7 @@ def add_avion():
         fabricante = request.json['fabricante']
         modelo = request.json['modelo']
         fecha_fabricacion = request.json['fecha_fabricacion']
-        capacidad_pasajeros= request.json['capacidad_pasajeros']
+        capacidad_pasajeros = request.json['capacidad_pasajeros']
         rango = request.json['rango']
         estado = request.json['estado']
         propietario = request.json['propietario']
@@ -38,6 +40,43 @@ def add_avion():
         affected_rows = AvionModel.add_avion(avion)
         if affected_rows == 1:
             return jsonify({avion.matricula})
+        else:
+            return jsonify({'message': 'Error'}, 500)
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@main.route('/delete/<matricula>', methods=['DELETE'])
+def delete_avion(matricula):
+    try:
+        affected_rows = AvionModel.delete_avion(matricula)
+        if affected_rows == 1:
+            return jsonify(matricula)
+        else:
+            return jsonify({'message': 'Error'}, 500)
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@main.route('/update/<matricula>', methods=['PATCH'])
+def update_avion(matricula):
+    try:
+
+        fabricante = request.json['fabricante']
+        modelo = request.json['modelo']
+        fecha_fabricacion = request.json['fecha_fabricacion']
+        capacidad_pasajeros = request.json['capacidad_pasajeros']
+        rango = request.json['rango']
+        estado = request.json['estado']
+        propietario = request.json['propietario']
+        avion = Avion(matricula, fabricante, modelo, fecha_fabricacion, capacidad_pasajeros
+                      , rango, estado, propietario)
+        print(avion.matricula)
+        affected_rows = AvionModel.update_avion(avion)
+        if affected_rows == 1:
+            return jsonify(avion.matricula)
         else:
             return jsonify({'message': 'Error'}, 500)
 

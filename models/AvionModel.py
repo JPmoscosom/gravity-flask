@@ -54,3 +54,33 @@ class AvionModel:
             return affected_rows
         except Exception as ex:
             raise Exception(ex)
+
+    @classmethod
+    def delete_avion(cls, matricula):
+        try:
+            conection = get_connection()
+            with conection.cursor() as cursor:
+                cursor.execute("DELETE FROM AVIONES WHERE matricula = %s", (matricula,))
+                affected_rows = cursor.rowcount
+                conection.commit()
+            conection.close()
+        except Exception as ex:
+            raise Exception(ex)
+
+    @classmethod
+    def update_avion(cls, avion):
+        try:
+            connection = get_connection()
+
+            with connection.cursor() as cursor:
+                cursor.execute("""UPDATE AVIONES SET fabricante = %s, modelo = %s,
+                  fecha_fabricacion = %s, capacidad_pasajeros = %s, rango = %s, estado = %s,
+                   propietario = %s WHERE matricula = %s""", (avion.fabricante, avion.modelo, avion.fecha_fabricacion,
+                                                              avion.capacidad_pasajeros, avion.rango, avion.estado,
+                                                              avion.propietario, avion.matricula))
+                affected_rows = cursor.rowcount
+                connection.commit()
+            connection.close()
+            return affected_rows
+        except Exception as ex:
+            raise Exception(ex)
