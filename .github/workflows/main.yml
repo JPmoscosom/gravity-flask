@@ -16,14 +16,18 @@ jobs:
     if: "contains(github.event.head_commit.message, 'to deploy')"
     steps:
       - uses: actions/checkout@v4
-
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v2'
+        with: 
+          service_account: 'github-actions@gravity-419021.iam.gserviceaccount.com'
+          service_account_key: ${{ secrets.GCP_SA_KEY_JSON }}
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+  
       # Setup gcloud CLI
       - uses: google-github-actions/setup-gcloud@v2
         with:
           version: ">= 363.0.0"
-          service_account: 'github-actions@gravity-419021.iam.gserviceaccount.com'
-          service_account_key: ${{ secrets.GCP_SA_KEY_JSON }}
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          
 
       # Build and push image to Google Container Registry
       - name: Build
