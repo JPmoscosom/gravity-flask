@@ -1,0 +1,8 @@
+buildjob:
+  stage: build
+  tags:
+    - flask
+  script:
+    - docker build -t jpmoscoso/gravity:latest
+    - docker image push jpmoscoso/gravity:latest
+    - aws ecs update-service -cluster gravity-cluster --service gavity --force-new-deployment
