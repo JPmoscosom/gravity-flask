@@ -9,7 +9,7 @@ def page_not_found(e):
     return "<h1>404 Page not found</h1>", 404
 
 
-# Set-Up2s
+# Set-Up3s
 if __name__ == '__main__':
     # app.config.from_object(configuration['development'])
     # Blueprints
