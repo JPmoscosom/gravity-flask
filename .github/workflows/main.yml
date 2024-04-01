@@ -21,6 +21,7 @@ jobs:
       - uses: google-github-actions/setup-gcloud@v2
         with:
           version: ">= 363.0.0"
+          service_account: 'github-actions@gravity-419021.iam.gserviceaccount.com'
           service_account_key: ${{ secrets.GCP_SA_KEY_JSON }}
           project_id: ${{ secrets.GCP_PROJECT_ID }}
 
