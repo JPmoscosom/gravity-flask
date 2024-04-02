@@ -15,11 +15,6 @@ def hello_world():
     return "Esta es la API de avioncitos"
 
 
-@app.route("/holis")
-def hello_world():
-    return "HOLAAAAAAAAAAAAAAAAA"
-
-
 # Set-Ups
 if __name__ == '__main__':
     # app.config.from_object(configuration['development'])
