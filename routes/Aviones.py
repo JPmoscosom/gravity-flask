@@ -5,7 +5,7 @@ from models.entities.Avion import Avion
 main = Blueprint('aviones_blueprint', __name__)
 
 
-@main.route('/')
+@main.route('/', methods=['GET', 'POST'])
 def get_aviones():
     try:
         aviones = AvionModel.get_all_aviones()
@@ -23,7 +23,7 @@ def get_avion(matricula):
         return jsonify({'error': str(e)}), 500
 
 
-@main.route('/add/new', methods=['GET', 'POST'])
+@main.route('/add/new', methods=['POST'])
 def add_avion():
     try:
         matricula = request.json['matricula']
