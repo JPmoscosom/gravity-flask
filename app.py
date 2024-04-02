@@ -10,6 +10,11 @@ def page_not_found(e):
     return "<h1>404 Page not found</h1>", 404
 
 
+@app.route("/")
+def hello_world():
+    return "Esta es la API de avioncitos"
+
+
 # Set-Ups
 if __name__ == '__main__':
     # app.config.from_object(configuration['development'])
