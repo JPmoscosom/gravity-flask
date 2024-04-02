@@ -17,11 +17,3 @@ if __name__ == '__main__':
     app.register_blueprint(Vuelos.main, url_prefix='/api/vuelos')
     app.register_error_handler(404, page_not_found)
     app.run(debug=True, use_reloader=False, host='0.0.0.0')
-
-
-
-
-
-
-
-
