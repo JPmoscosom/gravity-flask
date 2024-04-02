@@ -40,7 +40,7 @@ def add_avion():
             print(avion.matricula)
             affected_rows = AvionModel.add_avion(avion)
             if affected_rows == 1:
-                return avion.matricula
+                return jsonify({'message': 'Ok'}, 200)
             else:
                 return jsonify({'message': 'Error'}, 500)
         else:
