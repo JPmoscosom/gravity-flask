@@ -23,7 +23,7 @@ def get_avion(matricula):
         return jsonify({'error': str(e)}), 500
 
 
-@main.route('/add', methods=['POST'])
+@main.route('/add/new', methods=['POST'])
 def add_avion():
     try:
         matricula = request.json['matricula']
@@ -38,6 +38,7 @@ def add_avion():
                       , rango, estado, propietario)
         print(avion.matricula)
         AvionModel.add_avion(avion)
+
         return jsonify({avion.matricula})
 
     except Exception as e:
