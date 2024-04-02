@@ -44,7 +44,7 @@ def add_avion():
             else:
                 return jsonify({'message': 'Error'}, 500)
         else:
-            return jsonify({'Esperando una entrada.....'})
+            return 'Esperando una entrada.....'
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
