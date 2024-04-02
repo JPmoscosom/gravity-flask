@@ -14,6 +14,7 @@ def page_not_found(e):
 def hello_world():
     return "Esta es la API de avioncitos"
 
+
 app.register_blueprint(Aviones.main, url_prefix='/api/aviones')
 # Set-Ups
 if __name__ == '__main__':
