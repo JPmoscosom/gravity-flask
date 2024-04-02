@@ -5,7 +5,7 @@ from models.entities.Avion import Avion
 main = Blueprint('aviones_blueprint', __name__)
 
 
-@main.route('/')
+@main.route('/api')
 def get_aviones():
     try:
         aviones = AvionModel.get_all_aviones()
