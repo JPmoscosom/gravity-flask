@@ -38,7 +38,7 @@ def add_avion():
                       , rango, estado, propietario)
         print(avion.matricula)
         AvionModel.add_avion(avion)
-        return avion.matricula
+        return jsonify({avion.matricula})
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
