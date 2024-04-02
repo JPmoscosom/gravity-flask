@@ -26,22 +26,25 @@ def get_avion(matricula):
 @main.route('/add/new', methods=['GET', 'POST'])
 def add_avion():
     try:
-        matricula = request.json['matricula']
-        fabricante = request.json['fabricante']
-        modelo = request.json['modelo']
-        fecha_fabricacion = request.json['fecha_fabricacion']
-        capacidad_pasajeros = request.json['capacidad_pasajeros']
-        rango = request.json['rango']
-        estado = request.json['estado']
-        propietario = request.json['propietario']
-        avion = Avion(matricula, fabricante, modelo, fecha_fabricacion, capacidad_pasajeros
-                      , rango, estado, propietario)
-        print(avion.matricula)
-        affected_rows = AvionModel.add_avion(avion)
-        if affected_rows == 1:
-            return jsonify({avion.matricula})
+        if request.method == "POST":
+            matricula = request.json['matricula']
+            fabricante = request.json['fabricante']
+            modelo = request.json['modelo']
+            fecha_fabricacion = request.json['fecha_fabricacion']
+            capacidad_pasajeros = request.json['capacidad_pasajeros']
+            rango = request.json['rango']
+            estado = request.json['estado']
+            propietario = request.json['propietario']
+            avion = Avion(matricula, fabricante, modelo, fecha_fabricacion, capacidad_pasajeros
+                          , rango, estado, propietario)
+            print(avion.matricula)
+            affected_rows = AvionModel.add_avion(avion)
+            if affected_rows == 1:
+                return jsonify({avion.matricula})
+            else:
+                return jsonify({'message': 'Error'}, 500)
         else:
-            return jsonify({'message': 'Error'}, 500)
+            return jsonify({'Esperando una entrada.....'})
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
