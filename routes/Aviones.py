@@ -37,9 +37,11 @@ def add_avion():
         avion = Avion(matricula, fabricante, modelo, fecha_fabricacion, capacidad_pasajeros
                       , rango, estado, propietario)
         print(avion.matricula)
-        AvionModel.add_avion(avion)
-
-        return jsonify({avion.matricula})
+        affected_rows = AvionModel.add_avion(avion)
+        if affected_rows == 1:
+            return jsonify({avion.matricula})
+        else:
+            return jsonify({'message': 'Error'}, 500)
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
