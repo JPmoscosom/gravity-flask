@@ -11,7 +11,7 @@ def page_not_found(e):
 
 @app.route("/health", methods=["GET"])
 def health():
-    return "Service UP"
+    return "Service is working as intended"
 
 
 @app.route("/", methods=["GET"])
