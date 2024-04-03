@@ -1,5 +1,4 @@
 from flask import Flask
-from config import configuration
 from routes import Aviones, Vuelos
 import os
 
@@ -8,6 +7,11 @@ app = Flask(__name__)
 
 def page_not_found(e):
     return "<h1>404 Page not found</h1>", 404
+
+
+@app.route("/health", methods=["GET"])
+def health():
+    return "Service UP"
 
 
 @app.route("/", methods=["GET"])
