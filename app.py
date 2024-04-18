@@ -1,5 +1,6 @@
 import os
 
+import psycopg2
 from flask import Flask
 from flask import jsonify, request
 
@@ -17,28 +18,24 @@ def page_not_found(e):
 @app.route('/add', methods=['POST', 'GET'])
 def add_avion():
     try:
-        if request.method == "POST":
-            matricula = request.json['matricula']
-            fabricante = request.json['fabricante']
-            modelo = request.json['modelo']
-            fecha_fabricacion = request.json['fecha_fabricacion']
-            capacidad_pasajeros = request.json['capacidad_pasajeros']
-            rango = request.json['rango']
-            estado = request.json['estado']
-            propietario = request.json['propietario']
-            avion = Avion(matricula, fabricante, modelo, fecha_fabricacion, capacidad_pasajeros
-                          , rango, estado, propietario)
-            print(avion.matricula)
-            affected_rows = AvionModel.add_avion(avion)
-            if affected_rows == 1:
-                return jsonify({'message': 'Ok'}, 200)
-            else:
-                return jsonify({'message': 'Error'}, 500)
-        else:
-            return 'Esperando una entrada.....'
 
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        matricula = request.json['matricula']
+        fabricante = request.json['fabricante']
+        modelo = request.json['modelo']
+        fecha_fabricacion = request.json['fecha_fabricacion']
+        capacidad_pasajeros = request.json['capacidad_pasajeros']
+        rango = request.json['rango']
+        estado = request.json['estado']
+        propietario = request.json['propietario']
+        avion = Avion(matricula, fabricante, modelo, fecha_fabricacion, capacidad_pasajeros
+                      , rango, estado, propietario)
+        print(avion.matricula)
+        affected_rows = AvionModel.add_avion(avion)
+        return jsonify({'mensaje': 'Avion agregado exitosamente'}), 201
+
+    except (Exception, psycopg2.Error) as error:
+
+        return jsonify({'mensaje': 'Error al agregar el avion', 'error': str(error)}), 500
 
 
 @app.route("/health", methods=["GET"])
