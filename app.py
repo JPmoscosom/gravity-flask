@@ -11,7 +11,7 @@ def page_not_found(e):
 
 @app.route("/health", methods=["GET"])
 def health():
-    return jsonify({"Status de la API de Aviones": "200 Todo Gucci"})
+    return jsonify({"Status de la API de Aviones": "200 Todo Gucci mi fai"})
 
 
 @app.route("/", methods=["GET"])
