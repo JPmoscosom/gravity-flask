@@ -27,7 +27,9 @@ def get_avion(matricula):
 @main.route('/add/new', methods=['POST', 'GET'])
 def add_avion():
     try:
-
+        if request.method == 'GET':
+            return jsonify({'message': 'Ok'}), 201
+        else:
             matricula = request.json['matricula']
             fabricante = request.json['fabricante']
             modelo = request.json['modelo']
