@@ -1,3 +1,4 @@
+import psycopg2
 from flask import Blueprint, jsonify, request
 from models.AvionModel import AvionModel
 from models.entities.Avion import Avion
@@ -26,7 +27,7 @@ def get_avion(matricula):
 @main.route('/add/new', methods=['POST'])
 def add_avion():
     try:
-        if request.method == "POST":
+
             matricula = request.json['matricula']
             fabricante = request.json['fabricante']
             modelo = request.json['modelo']
@@ -38,16 +39,11 @@ def add_avion():
             avion = Avion(matricula, fabricante, modelo, fecha_fabricacion, capacidad_pasajeros
                           , rango, estado, propietario)
             print(avion.matricula)
-            affected_rows = AvionModel.add_avion(avion)
-            if affected_rows == 1:
-                return jsonify({'message': 'Ok'}, 200)
-            else:
-                return jsonify({'message': 'Error'}, 500)
-        else:
-            return 'Esperando una entrada.....'
+            AvionModel.add_avion(avion)
+            return jsonify({'message': 'Ok'}, 200)
 
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+    except (Exception, psycopg2.Error) as error:
+        return jsonify({'mensaje': 'Error al agregar el avion', 'error': str(error)}), 500
 
 
 @main.route('/delete/<matricula>', methods=['DELETE'])
