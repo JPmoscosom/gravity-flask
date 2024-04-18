@@ -14,7 +14,7 @@ def page_not_found(e):
     return "<h1>404 Page not found</h1>", 404
 
 
-@app.route('/add', methods=['POST'])
+@app.route('/add', methods=['POST', 'GET'])
 def add_avion():
     try:
         if request.method == "POST":
