@@ -79,7 +79,7 @@ class AvionModel:
                                                               avion.capacidad_pasajeros, avion.rango, avion.estado,
                                                               avion.propietario, avion.matricula))
                 affected_rows = cursor.rowcount
-                connection.commit()
+                connection.cursor().commit()
             connection.close()
             return affected_rows
         except Exception as ex:

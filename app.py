@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 from routes import Aviones, Vuelos
 import os
 
@@ -11,7 +11,7 @@ def page_not_found(e):
 
 @app.route("/health", methods=["GET"])
 def health():
-    return "Service is working as intended"
+    return jsonify({"Status de la API de Aviones": "200 Todo Gucci"})
 
 
 @app.route("/", methods=["GET"])
