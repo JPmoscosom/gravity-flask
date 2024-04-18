@@ -32,4 +32,3 @@ if __name__ == '__main__':
     app.register_blueprint(Vuelos.main, url_prefix='/api/vuelos')
     app.register_error_handler(404, page_not_found)
     app.run(debug=True, host='0.0.0.0', port=int(os.environ.get("PORT", 443)), use_reloader=False)
-
