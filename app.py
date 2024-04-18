@@ -1,12 +1,9 @@
-import os
-
-import psycopg2
-from flask import Flask
-from flask import jsonify, request
-
+from flask import Flask, jsonify
+from routes import Aviones, Vuelos
+from flask import Blueprint, jsonify, request
 from models.AvionModel import AvionModel
 from models.entities.Avion import Avion
-from routes import Aviones, Vuelos
+import os
 
 app = Flask(__name__)
 
@@ -14,28 +11,6 @@ app = Flask(__name__)
 def page_not_found(e):
     return "<h1>404 Page not found</h1>", 404
 
-
-@app.route('/add', methods=['POST', 'GET'])
-def add_avion():
-    try:
-
-        matricula = request.json['matricula']
-        fabricante = request.json['fabricante']
-        modelo = request.json['modelo']
-        fecha_fabricacion = request.json['fecha_fabricacion']
-        capacidad_pasajeros = request.json['capacidad_pasajeros']
-        rango = request.json['rango']
-        estado = request.json['estado']
-        propietario = request.json['propietario']
-        avion = Avion(matricula, fabricante, modelo, fecha_fabricacion, capacidad_pasajeros
-                      , rango, estado, propietario)
-        print(avion.matricula)
-        affected_rows = AvionModel.add_avion(avion)
-        return jsonify({'mensaje': 'Avion agregado exitosamente'}), 201
-
-    except (Exception, psycopg2.Error) as error:
-
-        return jsonify({'mensaje': 'Error al agregar el avion', 'error': str(error)}), 500
 
 
 @app.route("/health", methods=["GET"])
