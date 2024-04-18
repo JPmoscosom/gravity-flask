@@ -24,7 +24,7 @@ def get_avion(matricula):
         return jsonify({'error': str(e)}), 500
 
 
-@main.route('/add/new', methods=['POST'])
+@main.route('/add/new', methods=['POST', 'GET'])
 def add_avion():
     try:
 
