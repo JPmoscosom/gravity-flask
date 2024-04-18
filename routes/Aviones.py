@@ -40,7 +40,7 @@ def add_avion():
                           , rango, estado, propietario)
             print(avion.matricula)
             AvionModel.add_avion(avion)
-            return jsonify({'message': 'Ok'}, 200)
+            return jsonify({'message': 'Ok'}), 201
 
     except (Exception, psycopg2.Error) as error:
         return jsonify({'mensaje': 'Error al agregar el avion', 'error': str(error)}), 500
